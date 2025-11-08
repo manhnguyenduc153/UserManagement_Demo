@@ -20,11 +20,6 @@ namespace UserManagement_Demo.Controllers
             return View(lstUser);
         }
 
-        [HttpGet]
-        public IActionResult Add()
-        {
-            return View(new UserSaveDTO());
-        }
 
         [HttpPost]
         public async Task<IActionResult> Add(UserSaveDTO model)
@@ -40,26 +35,6 @@ namespace UserManagement_Demo.Controllers
                 TempData["ErrorMessage"] = "Failed to add user.";
 
             return RedirectToAction("List");
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Edit(int id)
-        {
-            var user = await _userService.GetByIdAsync(id);
-            if (user == null)
-                return NotFound();
-
-            var model = new UserSaveDTO
-            {
-                UserId = user.UserId,
-                FullName = user.FullName,
-                Email = user.Email,
-                Phone = user.Phone,
-                Address = user.Address,
-                Dob = user.Dob
-            };
-
-            return View(model);
         }
 
         [HttpPost]

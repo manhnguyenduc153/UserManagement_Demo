@@ -61,7 +61,7 @@ namespace UserManagement_Demo.Repositories
             var skip = (search.PageIndex - 1) * search.PageSize;
 
             var users = await query
-                .OrderBy(u => u.FullName)
+                .OrderByDescending(u => u.UserId)
                 .Skip(skip)
                 .Take(search.PageSize)
                 .ToListAsync();
